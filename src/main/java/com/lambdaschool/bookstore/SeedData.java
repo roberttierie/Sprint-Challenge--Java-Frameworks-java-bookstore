@@ -29,11 +29,6 @@ import java.util.Set;
  * after the application context has been loaded.
  */
 @Transactional
-@ConditionalOnProperty(
-        prefix = "command.line.runner",
-        value = "enabled",
-        havingValue = "true",
-        matchIfMissing = true)
 @Component
 public class SeedData
         implements CommandLineRunner {

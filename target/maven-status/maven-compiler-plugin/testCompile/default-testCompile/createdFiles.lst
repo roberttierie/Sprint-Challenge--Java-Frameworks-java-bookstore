@@ -1,4 +1,3 @@
-com\lambdaschool\javabookstore\JavabookstoreApplicationTests.class
 com\lambdaschool\bookstore\BookstoreApplicationTest.class
 com\lambdaschool\bookstore\controllers\BookControllerUnitTestNoDB.class
 com\lambdaschool\bookstore\services\BookServiceImplUnitTestNoDB.class
