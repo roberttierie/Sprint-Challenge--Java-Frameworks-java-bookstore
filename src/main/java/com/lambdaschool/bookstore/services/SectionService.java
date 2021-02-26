@@ -4,8 +4,7 @@ import com.lambdaschool.bookstore.models.Section;
 
 import java.util.List;
 
-public interface SectionService
-{
+public interface SectionService {
     List<Section> findAll();
 
     Section findSectionById(long id);

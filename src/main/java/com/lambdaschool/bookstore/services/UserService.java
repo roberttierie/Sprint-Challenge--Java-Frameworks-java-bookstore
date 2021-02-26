@@ -11,8 +11,7 @@ import java.util.List;
  * Roles are added through the add user process
  * No way to delete an assigned role
  */
-public interface UserService
-{
+public interface UserService {
     /**
      * Returns a list of all the Users
      *

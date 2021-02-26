@@ -9,8 +9,7 @@ import java.util.List;
  * <p>
  * Note: no method update Role name
  */
-public interface RoleService
-{
+public interface RoleService {
     /**
      * Returns a list of all Role objects
      *

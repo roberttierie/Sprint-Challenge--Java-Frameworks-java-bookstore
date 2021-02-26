@@ -17,8 +17,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig
-        extends AuthorizationServerConfigurerAdapter
-{
+        extends AuthorizationServerConfigurerAdapter {
     /**
      * Client Id is the user name for the client application. It is read from the environment variable OAUTHCLIENTID
      */
@@ -96,13 +95,12 @@ public class AuthorizationServerConfig
     @Override
     public void configure(ClientDetailsServiceConfigurer configurer)
             throws
-            Exception
-    {
+            Exception {
         configurer.inMemory()
                 .withClient(CLIENT_ID)
                 .secret(encoder.encode(CLIENT_SECRET))
                 .authorizedGrantTypes(GRANT_TYPE_PASSWORD,
-                                      AUTHORIZATION_CODE)
+                        AUTHORIZATION_CODE)
                 .scopes(SCOPE_READ,
                         SCOPE_WRITE,
                         TRUST)
@@ -120,12 +118,11 @@ public class AuthorizationServerConfig
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints)
             throws
-            Exception
-    {
+            Exception {
         endpoints.tokenStore(tokenStore)
                 .authenticationManager(authenticationManager);
         // here instead of our clients requesting authentication at the endpoint /oauth/token, they request it at the endpoint /login
         endpoints.pathMapping("/oauth/token",
-                              "/login");
+                "/login");
     }
 }

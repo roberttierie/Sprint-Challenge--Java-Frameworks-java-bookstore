@@ -15,8 +15,7 @@ import java.util.Map;
  */
 @Component
 public class CustomErrorDetails
-        extends DefaultErrorAttributes
-{
+        extends DefaultErrorAttributes {
     /**
      * Connects this class with the Helper Functions
      */
@@ -33,8 +32,7 @@ public class CustomErrorDetails
     @Override
     public Map<String, Object> getErrorAttributes(
             WebRequest webRequest,
-            boolean includeStackTrace)
-    {
+            boolean includeStackTrace) {
 
         //Get all the normal error information
         Map<String, Object> errorAttributes =

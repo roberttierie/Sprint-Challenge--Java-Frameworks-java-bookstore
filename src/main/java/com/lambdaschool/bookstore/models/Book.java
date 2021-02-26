@@ -19,8 +19,7 @@ import java.util.Set;
 @Table(name = "book")
 @JsonIgnoreProperties(value = "hasvalueforcopy")
 public class Book
-        extends Auditable
-{
+        extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long bookid;
@@ -42,93 +41,78 @@ public class Book
     @JsonIgnoreProperties("book")
     private Set<Wrote> wrotes = new HashSet<>();
 
-    public Book()
-    {
+    public Book() {
     }
 
     public Book(String title,
                 String isbn,
                 int copy,
-                Section section)
-    {
+                Section section) {
         this.title = title;
         this.isbn = isbn;
         this.copy = copy;
         this.section = section;
     }
 
-    public long getBookid()
-    {
+    public long getBookid() {
         return bookid;
     }
 
-    public void setBookid(long bookid)
-    {
+    public void setBookid(long bookid) {
         this.bookid = bookid;
     }
 
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title)
-    {
+    public void setTitle(String title) {
         this.title = title;
     }
 
-    public String getIsbn()
-    {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn)
-    {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
-    public int getCopy()
-    {
+    public int getCopy() {
         return copy;
     }
 
-    public void setCopy(int copy)
-    {
+    public void setCopy(int copy) {
         hasvalueforcopy = true;
         this.copy = copy;
     }
 
-    public Section getSection()
-    {
+    public Section getSection() {
         return section;
     }
 
-    public void setSection(Section section)
-    {
+    public void setSection(Section section) {
         this.section = section;
     }
 
-    public Set<Wrote> getWrotes()
-    {
+    public Set<Wrote> getWrotes() {
         return wrotes;
     }
 
-    public void setWrotes(Set<Wrote> wrotes)
-    {
+    public void setWrotes(Set<Wrote> wrotes) {
         this.wrotes = wrotes;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Book{" +
-            "bookid=" + bookid +
-            ", title='" + title + '\'' +
-            ", isbn='" + isbn + '\'' +
-            ", hasvalueforcopy=" + hasvalueforcopy +
-            ", copy=" + copy +
-            ", section=" + section +
-            ", wrotes=" + wrotes +
-            '}';
+                "bookid=" + bookid +
+                ", title='" + title + '\'' +
+                ", isbn='" + isbn + '\'' +
+                ", hasvalueforcopy=" + hasvalueforcopy +
+                ", copy=" + copy +
+                ", section=" + section +
+                ", wrotes=" + wrotes +
+                '}';
     }
 }

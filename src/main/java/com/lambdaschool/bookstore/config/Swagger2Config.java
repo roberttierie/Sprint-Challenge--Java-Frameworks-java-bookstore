@@ -19,20 +19,18 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 @Import(BeanValidatorPluginsConfiguration.class)
-public class Swagger2Config
-{
+public class Swagger2Config {
     /**
      * Configures what to document using Swagger
      *
      * @return A Docket which is the primary interface for Swagger configuration
      */
     @Bean
-    public Docket api()
-    {
+    public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors
-                              .basePackage("com.lambdaschool.bookstore"))
+                        .basePackage("com.lambdaschool.bookstore"))
                 .paths(PathSelectors.regex("/.*"))
                 .build()
                 .apiInfo(apiEndPointsInfo());
@@ -43,13 +41,12 @@ public class Swagger2Config
      *
      * @return ApiInfo a Swagger object containing identification information for this application
      */
-    private ApiInfo apiEndPointsInfo()
-    {
+    private ApiInfo apiEndPointsInfo() {
         return new ApiInfoBuilder().title("Bookstore Model Example")
                 .description("Bookstore Model Example")
                 .contact(new Contact("John Mitchell",
-                                     "http://www.lambdaschool.com",
-                                     "john@lambdaschool.com"))
+                        "http://www.lambdaschool.com",
+                        "john@lambdaschool.com"))
                 .license("MIT")
                 .licenseUrl("https://github.com/LambdaSchool/java-usermodel/blob/master/LICENSE")
                 .version("1.0.0")

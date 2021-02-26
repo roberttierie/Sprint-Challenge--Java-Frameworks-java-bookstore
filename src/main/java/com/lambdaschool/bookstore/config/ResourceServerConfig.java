@@ -14,13 +14,11 @@ import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHand
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig
-        extends ResourceServerConfigurerAdapter
-{
+        extends ResourceServerConfigurerAdapter {
     private static final String RESOURCE_ID = "resource_id";
 
     @Override
-    public void configure(ResourceServerSecurityConfigurer resources)
-    {
+    public void configure(ResourceServerSecurityConfigurer resources) {
         resources.resourceId(RESOURCE_ID)
                 .stateless(false);
     }
@@ -34,8 +32,7 @@ public class ResourceServerConfig
     @Override
     public void configure(HttpSecurity http)
             throws
-            Exception
-    {
+            Exception {
         // our antMatchers control which roles of users have access to which endpoints
         // we must order our antmatchers from most restrictive to least restrictive.
         // So restrict at method level before restricting at endpoint level.
@@ -44,21 +41,22 @@ public class ResourceServerConfig
         // hasAnyRole = must be authenticated and be assigned this role!
         http.authorizeRequests()
                 .antMatchers("/",
-                             "/h2-console/**",
-                             "/swagger-resources/**",
-                             "/swagger-resource/**",
-                             "/swagger-ui.html",
-                             "/v2/api-docs",
-                             "/webjars/**",
-                             "/createnewuser")
+                        "/h2-console/**",
+                        "/swagger-resources/**",
+                        "/swagger-resource/**",
+                        "/swagger-ui.html",
+                        "/v2/api-docs",
+                        "/webjars/**",
+                        "/createnewuser")
                 .permitAll()
                 .antMatchers("/users/**",
-                             "/useremails/**",
-                             "/oauth/revoke-token",
-                             "/logout")
+                        "/useremails/**",
+                        "/oauth/revoke-token",
+                        "/logout")
                 .authenticated()
                 .antMatchers("/roles/**")
                 .hasAnyRole("ADMIN", "DATA")
+                .antMatchers("/books/**").authenticated()
                 .anyRequest().denyAll()
                 .and()
                 .exceptionHandling()

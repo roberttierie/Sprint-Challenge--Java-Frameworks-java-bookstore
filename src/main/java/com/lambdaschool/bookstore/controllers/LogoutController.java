@@ -15,8 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * The application implements its own logout endpoint. This works by removing the authentication token for the user.
  */
 @Controller
-public class LogoutController
-{
+public class LogoutController {
     /**
      * Connect to the Token store so the application can remove the token
      */
@@ -34,14 +33,12 @@ public class LogoutController
     @RequestMapping(value = {"/oauth/revoke-token", "/logout"},
             method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public void logoutSelf(HttpServletRequest request)
-    {
+    public void logoutSelf(HttpServletRequest request) {
         String authHeader = request.getHeader("Authorization");
-        if (authHeader != null)
-        {
+        if (authHeader != null) {
             // find the token
             String tokenValue = authHeader.replace("Bearer",
-                                                   "")
+                    "")
                     .trim();
             // and remove it!
             OAuth2AccessToken accessToken = tokenStore.readAccessToken(tokenValue);

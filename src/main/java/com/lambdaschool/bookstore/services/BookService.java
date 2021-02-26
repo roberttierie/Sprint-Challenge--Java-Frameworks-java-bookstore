@@ -4,8 +4,7 @@ import com.lambdaschool.bookstore.models.Book;
 
 import java.util.List;
 
-public interface BookService
-{
+public interface BookService {
     List<Book> findAll();
 
     Book findBookById(long id);

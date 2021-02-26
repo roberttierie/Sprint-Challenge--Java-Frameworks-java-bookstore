@@ -10,8 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
  * The CRUD Repository connecting Role to the rest of the application
  */
 public interface RoleRepository
-        extends CrudRepository<Role, Long>
-{
+        extends CrudRepository<Role, Long> {
     /**
      * JPA Query to find a role by name case insensitive search
      *

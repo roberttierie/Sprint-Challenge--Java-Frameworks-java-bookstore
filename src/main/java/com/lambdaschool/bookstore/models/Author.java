@@ -15,8 +15,7 @@ import java.util.Set;
 @Entity
 @Table(name = "author")
 public class Author
-        extends Auditable
-{
+        extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @JsonIgnoreProperties("authorid")
@@ -31,54 +30,44 @@ public class Author
     @JsonIgnoreProperties("author")
     private Set<Wrote> wrotes = new HashSet<>();
 
-    public Author()
-    {
+    public Author() {
     }
 
     public Author(String fname,
-                  String lname)
-    {
+                  String lname) {
         this.fname = fname;
         this.lname = lname;
     }
 
-    public long getAuthorid()
-    {
+    public long getAuthorid() {
         return authorid;
     }
 
-    public void setAuthorid(long authorid)
-    {
+    public void setAuthorid(long authorid) {
         this.authorid = authorid;
     }
 
-    public String getFname()
-    {
+    public String getFname() {
         return fname;
     }
 
-    public void setFname(String fname)
-    {
+    public void setFname(String fname) {
         this.fname = fname;
     }
 
-    public String getLname()
-    {
+    public String getLname() {
         return lname;
     }
 
-    public void setLname(String lname)
-    {
+    public void setLname(String lname) {
         this.lname = lname;
     }
 
-    public Set<Wrote> getWrotes()
-    {
+    public Set<Wrote> getWrotes() {
         return wrotes;
     }
 
-    public void setWrotes(Set<Wrote> wrotes)
-    {
+    public void setWrotes(Set<Wrote> wrotes) {
         this.wrotes = wrotes;
     }
 }

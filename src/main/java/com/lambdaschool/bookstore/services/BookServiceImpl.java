@@ -3,22 +3,21 @@ package com.lambdaschool.bookstore.services;
 import com.lambdaschool.bookstore.models.Author;
 import com.lambdaschool.bookstore.models.Book;
 import com.lambdaschool.bookstore.models.Wrote;
+import com.lambdaschool.bookstore.exceptions.ResourceNotFoundException;
 import com.lambdaschool.bookstore.repository.AuthorRepository;
 import com.lambdaschool.bookstore.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
 @Service("bookService")
 public class BookServiceImpl
-        implements BookService
-{
+        implements BookService {
     @Autowired
     UserAuditing userAuditing;
 
@@ -32,8 +31,7 @@ public class BookServiceImpl
     AuthorRepository authorrepos;
 
     @Override
-    public List<Book> findAll()
-    {
+    public List<Book> findAll() {
         List<Book> list = new ArrayList<>();
         bookrepos.findAll()
                 .iterator()
@@ -42,54 +40,46 @@ public class BookServiceImpl
     }
 
     @Override
-    public Book findBookById(long id)
-    {
+    public Book findBookById(long id) {
         return bookrepos.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Book with id " + id + " Not Found!"));
+                .orElseThrow(() -> new ResourceNotFoundException("Book with id " + id + " Not Found!"));
     }
 
     @Transactional
     @Override
-    public void delete(long id)
-    {
+    public void delete(long id) {
         if (bookrepos.findById(id)
-                .isPresent())
-        {
+                .isPresent()) {
             bookrepos.deleteById(id);
-        } else
-        {
-            throw new EntityNotFoundException("Book with id " + id + " Not Found!");
+        } else {
+            throw new ResourceNotFoundException("Book with id " + id + " Not Found!");
         }
     }
 
     @Transactional
     @Override
-    public Book save(Book book)
-    {
+    public Book save(Book book) {
         Book newBook = new Book();
 
-        if (book.getBookid() != 0)
-        {
+        if (book.getBookid() != 0) {
             bookrepos.findById(book.getBookid())
-                    .orElseThrow(() -> new EntityNotFoundException("Book id " + book.getBookid() + " not found!"));
+                    .orElseThrow(() -> new ResourceNotFoundException("Book id " + book.getBookid() + " not found!"));
         }
 
         newBook.setTitle(book.getTitle());
         newBook.setIsbn(book.getIsbn());
         newBook.setCopy(book.getCopy());
-        if (book.getSection() != null)
-        {
+        if (book.getSection() != null) {
             newBook.setSection(sectionService.findSectionById(book.getSection()
-                                                                      .getSectionid()));
+                    .getSectionid()));
         }
 
         newBook.getWrotes()
                 .clear();
-        for (Wrote w : book.getWrotes())
-        {
+        for (Wrote w : book.getWrotes()) {
             Author addAuthor = authorrepos.findById(w.getAuthor()
-                                                            .getAuthorid())
-                    .orElseThrow(() -> new EntityNotFoundException("Author Id " + w.getAuthor()
+                    .getAuthorid())
+                    .orElseThrow(() -> new ResourceNotFoundException("Author Id " + w.getAuthor()
                             .getAuthorid() + " Not Found!"));
             newBook.getWrotes()
                     .add(new Wrote(addAuthor, newBook));
@@ -100,41 +90,34 @@ public class BookServiceImpl
     @Transactional
     @Override
     public Book update(Book book,
-                       long id)
-    {
+                       long id) {
         Book currentBook = findBookById(id);
 
-        if (book.getTitle() != null)
-        {
+        if (book.getTitle() != null) {
             currentBook.setTitle(book.getTitle());
         }
 
-        if (book.getIsbn() != null)
-        {
+        if (book.getIsbn() != null) {
             currentBook.setIsbn(book.getIsbn());
         }
 
-        if (book.hasvalueforcopy)
-        {
+        if (book.hasvalueforcopy) {
             currentBook.setCopy(book.getCopy());
         }
 
-        if (book.getSection() != null)
-        {
+        if (book.getSection() != null) {
             currentBook.setSection(sectionService.findSectionById(book.getSection()
-                                                                          .getSectionid()));
+                    .getSectionid()));
         }
 
         if (book.getWrotes()
-                .size() > 0)
-        {
+                .size() > 0) {
             currentBook.getWrotes()
                     .clear();
-            for (Wrote w : book.getWrotes())
-            {
+            for (Wrote w : book.getWrotes()) {
                 Author addAuthor = authorrepos.findById(w.getAuthor()
-                                                                .getAuthorid())
-                        .orElseThrow(() -> new EntityNotFoundException("Author Id " + w.getAuthor()
+                        .getAuthorid())
+                        .orElseThrow(() -> new ResourceNotFoundException("Author Id " + w.getAuthor()
                                 .getAuthorid() + " Not Found!"));
                 currentBook.getWrotes()
                         .add(new Wrote(addAuthor, currentBook));
@@ -146,8 +129,7 @@ public class BookServiceImpl
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public void deleteAll()
-    {
+    public void deleteAll() {
         bookrepos.deleteAll();
     }
 }

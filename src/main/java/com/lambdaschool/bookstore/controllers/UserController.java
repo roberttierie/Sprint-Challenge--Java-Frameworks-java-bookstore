@@ -27,8 +27,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/users")
-public class UserController
-{
+public class UserController {
     /**
      * Using the User service to process user data
      */
@@ -44,11 +43,10 @@ public class UserController
      */
     @GetMapping(value = "/users",
             produces = "application/json")
-    public ResponseEntity<?> listAllUsers()
-    {
+    public ResponseEntity<?> listAllUsers() {
         List<User> myUsers = userService.findAll();
         return new ResponseEntity<>(myUsers,
-                                    HttpStatus.OK);
+                HttpStatus.OK);
     }
 
     /**
@@ -63,11 +61,10 @@ public class UserController
             produces = "application/json")
     public ResponseEntity<?> getUserById(
             @PathVariable
-                    Long userId)
-    {
+                    Long userId) {
         User u = userService.findUserById(userId);
         return new ResponseEntity<>(u,
-                                    HttpStatus.OK);
+                HttpStatus.OK);
     }
 
     /**
@@ -82,11 +79,10 @@ public class UserController
             produces = "application/json")
     public ResponseEntity<?> getUserByName(
             @PathVariable
-                    String userName)
-    {
+                    String userName) {
         User u = userService.findByName(userName);
         return new ResponseEntity<>(u,
-                                    HttpStatus.OK);
+                HttpStatus.OK);
     }
 
     /**
@@ -101,11 +97,10 @@ public class UserController
             produces = "application/json")
     public ResponseEntity<?> getUserLikeName(
             @PathVariable
-                    String userName)
-    {
+                    String userName) {
         List<User> u = userService.findByNameContaining(userName);
         return new ResponseEntity<>(u,
-                                    HttpStatus.OK);
+                HttpStatus.OK);
     }
 
     /**
@@ -125,8 +120,7 @@ public class UserController
             @Valid
             @RequestBody
                     User newuser) throws
-            URISyntaxException
-    {
+            URISyntaxException {
         newuser.setUserid(0);
         newuser = userService.save(newuser);
 
@@ -139,8 +133,8 @@ public class UserController
         responseHeaders.setLocation(newUserURI);
 
         return new ResponseEntity<>(null,
-                                    responseHeaders,
-                                    HttpStatus.CREATED);
+                responseHeaders,
+                HttpStatus.CREATED);
     }
 
     /**
@@ -163,8 +157,7 @@ public class UserController
             @RequestBody
                     User updateUser,
             @PathVariable
-                    long userid)
-    {
+                    long userid) {
         updateUser.setUserid(userid);
         userService.save(updateUser);
 
@@ -188,10 +181,9 @@ public class UserController
             @RequestBody
                     User updateUser,
             @PathVariable
-                    long id)
-    {
+                    long id) {
         userService.update(updateUser,
-                           id);
+                id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -205,8 +197,7 @@ public class UserController
     @DeleteMapping(value = "/user/{id}")
     public ResponseEntity<?> deleteUserById(
             @PathVariable
-                    long id)
-    {
+                    long id) {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

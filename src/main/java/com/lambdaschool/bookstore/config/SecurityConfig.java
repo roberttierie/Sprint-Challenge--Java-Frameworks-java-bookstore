@@ -25,8 +25,7 @@ import javax.annotation.Resource;
 // This allows us to further restrict access to an endpoint inside of a controller.
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig
-        extends WebSecurityConfigurerAdapter
-{
+        extends WebSecurityConfigurerAdapter {
     /**
      * Allows us to customize the Authentication Manager. Normally, as we do here, we just take the defaults.
      *
@@ -37,8 +36,7 @@ public class SecurityConfig
     @Bean
     public AuthenticationManager authenticationManagerBean()
             throws
-            Exception
-    {
+            Exception {
         return super.authenticationManagerBean();
     }
 
@@ -57,8 +55,7 @@ public class SecurityConfig
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth)
             throws
-            Exception
-    {
+            Exception {
         auth.userDetailsService(userDetailsService)
                 .passwordEncoder(encoder());
     }
@@ -70,8 +67,7 @@ public class SecurityConfig
      * @return A token store configured to be used in memory
      */
     @Bean
-    public TokenStore tokenStore()
-    {
+    public TokenStore tokenStore() {
         return new InMemoryTokenStore();
     }
 
@@ -81,8 +77,7 @@ public class SecurityConfig
      * @return A password will be encoded using the standard BCrypt method
      */
     @Bean
-    public PasswordEncoder encoder()
-    {
+    public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 }

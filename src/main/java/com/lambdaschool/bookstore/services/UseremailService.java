@@ -10,8 +10,7 @@ import java.util.List;
  * <p>
  * Note: Emails are added through the add user process
  */
-public interface UseremailService
-{
+public interface UseremailService {
     /**
      * Returns a list of all users and their emails
      *

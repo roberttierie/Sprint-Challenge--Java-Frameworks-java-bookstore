@@ -9,20 +9,19 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
 @Service("authorService")
 public class AuthorServiceImpl
-        implements AuthorService
-{
+        implements AuthorService {
     @Autowired
     AuthorRepository authorrespos;
 
     @Override
-    public List<Author> findAll()
-    {
+    public List<Author> findAll() {
         List<Author> list = new ArrayList<>();
         authorrespos.findAll()
                 .iterator()
@@ -31,33 +30,27 @@ public class AuthorServiceImpl
     }
 
     @Override
-    public Author findAuthorById(long id)
-    {
+    public Author findAuthorById(long id) {
         return authorrespos.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Author with id " + id + " Not Found!"));
     }
 
     @Transactional
     @Override
-    public void delete(long id)
-    {
+    public void delete(long id) {
         if (authorrespos.findById(id)
-                .isPresent())
-        {
+                .isPresent()) {
             authorrespos.deleteById(id);
-        } else
-        {
+        } else {
             throw new ResourceNotFoundException("Author with id " + id + " Not Found!");
         }
     }
 
     @Transactional
     @Override
-    public Author save(Author author)
-    {
+    public Author save(Author author) {
         if (author.getWrotes()
-                .size() > 0)
-        {
+                .size() > 0) {
             throw new ResourceFoundException("Wrotes are not added through Author.");
         }
 
@@ -71,22 +64,18 @@ public class AuthorServiceImpl
     @Transactional
     @Override
     public Author update(Author author,
-                         long id)
-    {
+                         long id) {
         Author currentAuthor = findAuthorById(id);
         if (author.getWrotes()
-                .size() > 0)
-        {
+                .size() > 0) {
             throw new ResourceFoundException("Wrotes are not updated through Author.");
         }
 
-        if (author.getFname() != null)
-        {
+        if (author.getFname() != null) {
             currentAuthor.setFname(author.getFname());
         }
 
-        if (author.getLname() != null)
-        {
+        if (author.getLname() != null) {
             currentAuthor.setLname(author.getLname());
         }
         return authorrespos.save(currentAuthor);
@@ -94,8 +83,7 @@ public class AuthorServiceImpl
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public void deleteAll()
-    {
+    public void deleteAll() {
         authorrespos.deleteAll();
     }
 

@@ -6,8 +6,7 @@ import java.io.Serializable;
  * Class to represent the complex primary key for UserRoles
  */
 public class UserRolesId
-        implements Serializable
-{
+        implements Serializable {
     /**
      * The id of the user
      */
@@ -21,8 +20,7 @@ public class UserRolesId
     /**
      * The default constructor required by JPA
      */
-    public UserRolesId()
-    {
+    public UserRolesId() {
     }
 
     /**
@@ -30,8 +28,7 @@ public class UserRolesId
      *
      * @return long the user id
      */
-    public long getUser()
-    {
+    public long getUser() {
         return user;
     }
 
@@ -40,8 +37,7 @@ public class UserRolesId
      *
      * @param user the new user id for this object
      */
-    public void setUser(long user)
-    {
+    public void setUser(long user) {
         this.user = user;
     }
 
@@ -50,8 +46,7 @@ public class UserRolesId
      *
      * @return long the role id
      */
-    public long getRole()
-    {
+    public long getRole() {
         return role;
     }
 
@@ -60,20 +55,16 @@ public class UserRolesId
      *
      * @param role the new role id for this object
      */
-    public void setRole(long role)
-    {
+    public void setRole(long role) {
         this.role = role;
     }
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
-        {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass())
-        {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
         UserRolesId that = (UserRolesId) o;
@@ -82,8 +73,7 @@ public class UserRolesId
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return 37;
     }
 }

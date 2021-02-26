@@ -15,8 +15,7 @@ import java.io.Serializable;
 @IdClass(WroteId.class)
 public class Wrote
         extends Auditable
-        implements Serializable
-{
+        implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "authorid")
@@ -29,46 +28,37 @@ public class Wrote
     @JsonIgnoreProperties("wrotes")
     private Book book;
 
-    public Wrote()
-    {
+    public Wrote() {
     }
 
     public Wrote(Author author,
-                 Book book)
-    {
+                 Book book) {
         this.author = author;
         this.book = book;
     }
 
-    public Author getAuthor()
-    {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author)
-    {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 
-    public Book getBook()
-    {
+    public Book getBook() {
         return book;
     }
 
-    public void setBook(Book book)
-    {
+    public void setBook(Book book) {
         this.book = book;
     }
 
     @Override
-    public boolean equals(Object o)
-    {
-        if (this == o)
-        {
+    public boolean equals(Object o) {
+        if (this == o) {
             return true;
         }
-        if (!(o instanceof Wrote))
-        {
+        if (!(o instanceof Wrote)) {
             return false;
         }
         Wrote that = (Wrote) o;
@@ -77,8 +67,7 @@ public class Wrote
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         return 37;
     }
 }

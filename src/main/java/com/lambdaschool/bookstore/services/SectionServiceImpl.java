@@ -9,20 +9,19 @@ import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
 @Service("sectionService")
 public class SectionServiceImpl
-        implements SectionService
-{
+        implements SectionService {
     @Autowired
     SectionRepository sectionrepos;
 
     @Override
-    public List<Section> findAll()
-    {
+    public List<Section> findAll() {
         List<Section> list = new ArrayList<>();
         sectionrepos.findAll()
                 .iterator()
@@ -32,40 +31,32 @@ public class SectionServiceImpl
     }
 
     @Override
-    public Section findSectionById(long id)
-    {
+    public Section findSectionById(long id) {
         return sectionrepos.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Section with id " + id + " Not Found!"));
     }
 
     @Transactional
     @Override
-    public void delete(long id)
-    {
+    public void delete(long id) {
         Section goodbyeSection = findSectionById(id);
-        if (goodbyeSection != null)
-        {
+        if (goodbyeSection != null) {
             if (goodbyeSection.getBooks()
-                    .size() > 0)
-            {
+                    .size() > 0) {
                 throw new ResourceFoundException("Sections containing books cannot be deleted. Move the books to a new section first");
-            } else
-            {
+            } else {
                 sectionrepos.deleteById(id);
             }
-        } else
-        {
+        } else {
             throw new ResourceNotFoundException("Section with id " + id + " Not Found!");
         }
     }
 
     @Transactional
     @Override
-    public Section save(Section section)
-    {
+    public Section save(Section section) {
         if (section.getBooks()
-                .size() > 0)
-        {
+                .size() > 0) {
             throw new ResourceFoundException("Book are not added through sections.");
         }
 
@@ -79,18 +70,15 @@ public class SectionServiceImpl
     @Transactional
     @Override
     public Section update(Section section,
-                          long id)
-    {
+                          long id) {
         Section currentSection = findSectionById(id);
 
         if (section.getBooks()
-                .size() > 0)
-        {
+                .size() > 0) {
             throw new ResourceFoundException("Book are not updated through sections.");
         }
 
-        if (section.getName() != null)
-        {
+        if (section.getName() != null) {
             currentSection.setName(section.getName());
         }
 
@@ -99,8 +87,7 @@ public class SectionServiceImpl
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public void deleteAll()
-    {
+    public void deleteAll() {
         sectionrepos.deleteAll();
     }
 }

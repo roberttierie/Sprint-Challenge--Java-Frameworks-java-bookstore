@@ -10,8 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class SwaggerWebMVC
-        implements WebMvcConfigurer
-{
+        implements WebMvcConfigurer {
     /**
      * Adds the Swagger web pages to Spring.
      * This still gives the following warning
@@ -24,8 +23,7 @@ public class SwaggerWebMVC
      * @param registry the place that holds the web pages for Spring
      */
     @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry)
-    {
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
 

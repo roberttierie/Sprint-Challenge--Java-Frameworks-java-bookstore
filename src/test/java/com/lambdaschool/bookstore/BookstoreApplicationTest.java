@@ -10,8 +10,7 @@ import org.springframework.core.env.Environment;
  */
 // @EnableJpaAuditing
 @SpringBootApplication
-public class BookstoreApplicationTest
-{
+public class BookstoreApplicationTest {
     /**
      * Connect to the system environment where environment variables live.
      */
@@ -29,10 +28,8 @@ public class BookstoreApplicationTest
      *
      * @param envvar The system environment where environment variable live
      */
-    private static void checkEnvironmentVariable(String envvar)
-    {
-        if (System.getenv(envvar) == null)
-        {
+    private static void checkEnvironmentVariable(String envvar) {
+        if (System.getenv(envvar) == null) {
             stop = true;
             System.out.println("***** Environment Variable " + envvar + " Not Found *****");
         }
@@ -43,17 +40,15 @@ public class BookstoreApplicationTest
      *
      * @param args Not used in this application.
      */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         // Check to see if the environment variables exists. If they do not, stop execution of application.
         checkEnvironmentVariable("OAUTHCLIENTID");
         checkEnvironmentVariable("OAUTHCLIENTSECRET");
 
-        if (!stop)
-        {
+        if (!stop) {
             // so run the application!
             SpringApplication.run(BookstoreApplicationTest.class,
-                                  args);
+                    args);
         }
     }
 }

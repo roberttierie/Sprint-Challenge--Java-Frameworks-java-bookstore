@@ -14,8 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name = "section")
 public class Section
-        extends Auditable
-{
+        extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long sectionid;
@@ -26,51 +25,42 @@ public class Section
     @JsonIgnoreProperties("section")
     private Set<Book> books = new HashSet<>();
 
-    public Section()
-    {
+    public Section() {
     }
 
-    public Section(String name)
-    {
+    public Section(String name) {
         this.name = name;
     }
 
-    public long getSectionid()
-    {
+    public long getSectionid() {
         return sectionid;
     }
 
-    public void setSectionid(long sectionid)
-    {
+    public void setSectionid(long sectionid) {
         this.sectionid = sectionid;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName(String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public Set<Book> getBooks()
-    {
+    public Set<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(Set<Book> books)
-    {
+    public void setBooks(Set<Book> books) {
         this.books = books;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "Section{" +
-            "sectionid=" + sectionid +
-            ", name='" + name + '\'' +
-            '}';
+                "sectionid=" + sectionid +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

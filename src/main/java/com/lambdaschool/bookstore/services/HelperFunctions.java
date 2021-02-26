@@ -8,8 +8,7 @@ import java.util.List;
  * Class contains helper functions - functions that are needed throughout the application. The class can be autowired
  * into any class.
  */
-public interface HelperFunctions
-{
+public interface HelperFunctions {
     /**
      * Searches to see if the exception has any constraint violations to report
      *

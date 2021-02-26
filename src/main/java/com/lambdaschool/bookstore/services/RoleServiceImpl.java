@@ -19,8 +19,7 @@ import java.util.List;
 @Transactional
 @Service(value = "roleService")
 public class RoleServiceImpl
-        implements RoleService
-{
+        implements RoleService {
     /**
      * Connects this service to the Role Model
      */
@@ -40,8 +39,7 @@ public class RoleServiceImpl
     private UserAuditing userAuditing;
 
     @Override
-    public List<Role> findAll()
-    {
+    public List<Role> findAll() {
         List<Role> list = new ArrayList<>();
         /*
          * findAll returns an iterator set.
@@ -55,33 +53,27 @@ public class RoleServiceImpl
 
 
     @Override
-    public Role findRoleById(long id)
-    {
+    public Role findRoleById(long id) {
         return rolerepos.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Role id " + id + " not found!"));
     }
 
     @Override
-    public Role findByName(String name)
-    {
+    public Role findByName(String name) {
         Role rr = rolerepos.findByNameIgnoreCase(name);
 
-        if (rr != null)
-        {
+        if (rr != null) {
             return rr;
-        } else
-        {
+        } else {
             throw new ResourceNotFoundException(name);
         }
     }
 
     @Transactional
     @Override
-    public Role save(Role role)
-    {
+    public Role save(Role role) {
         if (role.getUsers()
-                .size() > 0)
-        {
+                .size() > 0) {
             throw new ResourceFoundException("User Roles are not updated through Role.");
         }
 
@@ -90,33 +82,29 @@ public class RoleServiceImpl
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     @Override
-    public void deleteAll()
-    {
+    public void deleteAll() {
         rolerepos.deleteAll();
     }
 
     @Transactional
     @Override
     public Role update(long id,
-                       Role role)
-    {
-        if (role.getName() == null)
-        {
+                       Role role) {
+        if (role.getName() == null) {
             throw new ResourceNotFoundException("No role name found to update!");
         }
 
         if (role.getUsers()
-                .size() > 0)
-        {
+                .size() > 0) {
             throw new ResourceFoundException("User Roles are not updated through Role. See endpoint POST: users/user/{userid}/role/{roleid}");
         }
 
         Role newRole = findRoleById(id); // see if id exists
 
         rolerepos.updateRoleName(userAuditing.getCurrentAuditor()
-                                         .get(),
-                                 id,
-                                 role.getName());
+                        .get(),
+                id,
+                role.getName());
         return findRoleById(id);
     }
 }
