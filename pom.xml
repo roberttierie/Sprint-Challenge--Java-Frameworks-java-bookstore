@@ -119,6 +119,8 @@
     </dependencies>
 
     <build>
+        <finalName>ptierie-web38</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
